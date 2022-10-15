@@ -10,7 +10,7 @@ public class Word {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private int id;
 
     @Column(name = "word_value", length = 50)
     private String wordValue;

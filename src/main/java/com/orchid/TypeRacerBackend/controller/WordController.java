@@ -15,11 +15,17 @@ import java.util.List;
 @NoArgsConstructor
 public class WordController {
 
+    public static final int TEXT_LENGTH = 120;
     @Autowired
     private WordService wordService;
 
     @GetMapping()
     public List<Word> getWords() {
         return wordService.getWords();
+    }
+
+    @GetMapping(path="/generate")
+    public List<Word> getGeneratedText() {
+        return wordService.getRandomText(TEXT_LENGTH);
     }
 }
