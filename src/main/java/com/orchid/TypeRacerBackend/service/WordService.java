@@ -27,19 +27,19 @@ public class WordService {
      * @param size number of words to be generated
      * @return list containing random words
      */
-    public List<Word> getRandomText(int size) throws IllegalArgumentException{
+    public String getRandomText(int size) throws IllegalArgumentException{
         if (size <= 0) {
             throw new IllegalArgumentException("Size cannot be lower than 0");
         }
         List<Word> words = wordRepository.findAll();
 
-        List<Word> generatedText = new ArrayList<>();
+        StringBuffer generatedText = new StringBuffer();
         int noOfWords = words.size();
         SplittableRandom random = new SplittableRandom();
 
-        IntConsumer addWord = wordIndex -> {generatedText.add(words.get(wordIndex));};
+        IntConsumer addWord = wordIndex -> {generatedText.append(words.get(wordIndex).getWordValue()).append(" ");};
         random.ints(size, 1, noOfWords).distinct().forEach(addWord);
 
-        return generatedText;
+        return generatedText.toString();
     }
 }
